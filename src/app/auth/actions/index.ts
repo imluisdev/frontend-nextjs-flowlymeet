@@ -18,7 +18,7 @@ export async function singUpWithEmailAndPassword(data: {
 }) {
     const supabase = await createSupabaseServerClient();
     const result = await supabase.auth.signUp({ email: data.email, password: data.password, options: {
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/login`
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/auth/login`
     }});
 
     return result;
