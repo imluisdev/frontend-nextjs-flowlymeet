@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils"
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { getSupabaseFrontendClient } from '@/lib/supabase/client';
-import { isValidEmail, isValidPassword } from "@/lib/utils/validation";
+import { isValidEmail, isValidPassword } from "@/lib/utils/user.validation";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
