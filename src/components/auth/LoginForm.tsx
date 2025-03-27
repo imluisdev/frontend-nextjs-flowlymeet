@@ -8,7 +8,7 @@ import Link from "next/link"
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { singInWithEmailAndPassword } from '@/app/auth/actions';
-import { isValidEmail, isValidPassword } from "@/lib/utils/validation";
+import { isValidEmail, isValidPassword } from "@/lib/utils/user.validation";
 
 export function LoginForm() {
     const [email, setEmail] = useState('');
