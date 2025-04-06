@@ -2,41 +2,41 @@
 import { cn } from "@/lib/utils"
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { getSupabaseFrontendClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
 
 export function ConfirmAccountForm() {
-    const [status, setStatus] = useState<'loading' | 'success' | 'error' | 'no-code'>('loading');
+    const [status, setStatus] = useState<'loading' | 'success' | 'error' | 'no-token'>('loading');
     const router = useRouter();
     const searchParams = useSearchParams();
-    const supabase = getSupabaseFrontendClient();
+    const supabase = createClient();
 
     useEffect(() => {
         const confirmEmail = async () => {
             try {
-                const code = searchParams.get('code');
-                console.log(code);
-                if (!code) {
-                    setStatus('no-code');
+                const token_hash = searchParams.get('token_hash');
+                console.log(token_hash);
+                if (!token_hash) {
+                    setStatus('no-token');
                     return;
                 }
                 const { error, data }= await supabase.auth.verifyOtp({
-                    token_hash: code,
+                    token_hash: token_hash,
                     type: 'signup',
                 });
                 console.log(error);
                 console.log(data.session);
 
-                if (error) {
-                    setStatus('error');
-                } else {
-                    setStatus('success');
-                    setTimeout(() => {
-                        router.push('/auth/login');
-                    }, 3000);
-                }
+                // if (error) {
+                //     setStatus('error');
+                // } else {
+                //     setStatus('success');
+                //     setTimeout(() => {
+                //         router.push('/auth/login');
+                //     }, 3000);
+                // }
             } catch (error) {
                 setStatus('error');
             }
@@ -56,16 +56,16 @@ export function ConfirmAccountForm() {
                                     {status === 'loading' && 'Verificando tu cuenta...'}
                                     {status === 'success' && '¡Cuenta verificada!'}
                                     {status === 'error' && 'Error de verificación'}
-                                    {status === 'no-code' && 'Verificación pendiente'}
+                                    {status === 'no-token' && 'Verificación pendiente'}
                                 </h1>
                                 <p className="text-balance text-muted-foreground">
                                     {status === 'loading' && 'Por favor espera mientras verificamos tu cuenta.'}
                                     {status === 'success' && 'Tu cuenta ha sido verificada exitosamente. Serás redirigido al inicio de sesión.'}
                                     {status === 'error' && 'Ha ocurrido un error al verificar tu cuenta. Por favor, intenta de nuevo.'}
-                                    {status === 'no-code' && 'Por favor, revisa tu correo electrónico y haz clic en el enlace de verificación que te hemos enviado.'}
+                                    {status === 'no-token' && 'Por favor, revisa tu correo electrónico y haz clic en el enlace de verificación que te hemos enviado.'}
                                 </p>
                             </div>
-                            {(status === 'error' || status === 'no-code') && (
+                            {(status === 'error' || status === 'no-token') && (
                                 <div className="text-center">
                                     <Link href="/auth/login">
                                         <Button className="bg-[#7886C7] hover:bg-[#A9B5DF]">

@@ -1,13 +1,14 @@
 'use client';
 import { cn } from "@/lib/utils"
-import { useRouter, useSearchParams} from 'next/navigation';
+import { redirect, useRouter, useSearchParams} from 'next/navigation';
 import { useState } from 'react';
-import { getSupabaseFrontendClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import { EmailOtpType } from "@supabase/supabase-js";
 
 export function UpdatePasswordForm() {
     const [password, setPassword] = useState('');
@@ -15,7 +16,7 @@ export function UpdatePasswordForm() {
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
     const router = useRouter();
-    const supabase = getSupabaseFrontendClient();
+    const supabase = createClient();
     const searchParams = useSearchParams();
   
     const handleSubmit = async (e: React.FormEvent) => {
@@ -23,8 +24,10 @@ export function UpdatePasswordForm() {
         setError('');
         setMessage('');
 
-        const code = searchParams.get('code');
-        console.log(code);
+        const token_hash = searchParams.get('token_hash')
+        const type = searchParams.get('type') as EmailOtpType | null
+        const next = searchParams.get('next') ?? '/'
+        
 
         if (password.length < 6) {
             setError('La contraseña debe tener al menos 6 caracteres');
@@ -35,16 +38,22 @@ export function UpdatePasswordForm() {
             setError('Las contraseñas no coinciden');
             return;
         }
+        if (token_hash && type) {
 
-        supabase.auth.onAuthStateChange(async (event, session) => {
-            if (event == "PASSWORD_RECOVERY") {
-            const { data, error } = await supabase.auth
-                .updateUser({ password: password })
-        
-            if (data) alert("Password updated successfully!")
-            if (error) alert("There was an error updating your password.")
-            }
+        const { error } = await supabase.auth.resetPasswordForEmail({
+          password: password,
+          email: email,
+          token: token_hash,
+          type: type,
+          options: {
+            emailRedirectTo: `${window.location.origin}/auth/confirm-account`,
+          },
         })
+        if (!error) {
+            // redirect user to specified redirect URL or root of app
+            redirect(next)
+          }
+        }
 
         if (error) {
             setError('Ha ocurrido un error al actualizar la contraseña. Por favor, intenta de nuevo.');

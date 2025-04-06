@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils"
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { getSupabaseFrontendClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import { isValidEmail, isValidPassword } from "@/lib/utils/user.validation";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -16,7 +16,7 @@ export function SignUpForm() {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const router = useRouter();
-    const supabase = getSupabaseFrontendClient();
+    const supabase = createClient();
   
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -35,7 +35,7 @@ export function SignUpForm() {
             email: email,
             password: password,
             options: {
-            emailRedirectTo: `${window.location.origin}/auth/confirm-account`,
+            emailRedirectTo: `${window.location.origin}/auth/confirm`,
             },
         });
         console.log(response);

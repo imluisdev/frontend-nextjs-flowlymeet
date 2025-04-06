@@ -167,6 +167,7 @@ import data from "./data.json"
 
 export default function Page() {
   return (
+    <NavBar>
     <SidebarProvider>
       <AppSidebar variant="inset" />
       <SidebarInset>
