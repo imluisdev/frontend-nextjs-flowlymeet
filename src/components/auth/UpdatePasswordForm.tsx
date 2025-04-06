@@ -24,11 +24,6 @@ export function UpdatePasswordForm() {
         setError('');
         setMessage('');
 
-        const token_hash = searchParams.get('token_hash')
-        const type = searchParams.get('type') as EmailOtpType | null
-        const next = searchParams.get('next') ?? '/'
-        
-
         if (password.length < 6) {
             setError('La contraseña debe tener al menos 6 caracteres');
             return;
@@ -38,22 +33,10 @@ export function UpdatePasswordForm() {
             setError('Las contraseñas no coinciden');
             return;
         }
-        if (token_hash && type) {
 
-        const { error } = await supabase.auth.resetPasswordForEmail({
+        const { error } = await supabase.auth.updateUser({
           password: password,
-          email: email,
-          token: token_hash,
-          type: type,
-          options: {
-            emailRedirectTo: `${window.location.origin}/auth/confirm-account`,
-          },
         })
-        if (!error) {
-            // redirect user to specified redirect URL or root of app
-            redirect(next)
-          }
-        }
 
         if (error) {
             setError('Ha ocurrido un error al actualizar la contraseña. Por favor, intenta de nuevo.');
