@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils"
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { getSupabaseFrontendClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import { isValidEmail } from "@/lib/utils/user.validation";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -15,7 +15,7 @@ export function ResetPasswordForm() {
     const [emailError, setEmailError] = useState('');
     const [message, setMessage] = useState('');
     const router = useRouter();
-    const supabase = getSupabaseFrontendClient();
+    const supabase = createClient();
   
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
