@@ -7,7 +7,7 @@ const loginFormSchema = z.object({
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
 });
 
-export async function login(prevState: any, formData: FormData) {
+export async function login(prevState: unknown, formData: FormData) {
   const loginData = Object.fromEntries(formData);
   const validatedLoginData = loginFormSchema.safeParse(loginData);
 
@@ -37,7 +37,7 @@ export async function login(prevState: any, formData: FormData) {
     return {
       success: "Login successful!",
     };
-  } catch (error) {
+  } catch {
     return {
       errors: {
         general: "Failed to login. Please try again.",

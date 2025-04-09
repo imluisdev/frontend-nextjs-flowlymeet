@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button"
 
 const NavbarDesktop = () => {
@@ -8,7 +8,7 @@ const NavbarDesktop = () => {
     return (
         <nav className="text-[#7886C7] p-2 border-[#d3d3d3] border-b-[1px]">
           <div className="container mx-auto flex justify-between items-center">
-            <img src={logoUrl} alt="Logo" className="h-20" />
+            <Image src={logoUrl} alt="Logo" className="h-20" width={100} height={100} />
             <div className="flex gap-4">
               <Button variant="link" className="font-bold text-[#7886C7]">
                 Acerca de
