@@ -3,21 +3,14 @@
 import * as React from "react"
 import {
   ArrowUpCircleIcon,
-  BarChartIcon,
   CameraIcon,
-  ClipboardListIcon,
-  DatabaseIcon,
   FileCodeIcon,
-  FileIcon,
   FileTextIcon,
-  FolderIcon,
   HelpCircleIcon,
+  HistoryIcon,
   LayoutDashboardIcon,
-  ListIcon,
   SearchIcon,
   SettingsIcon,
-  UsersIcon,
-  HistoryIcon,
 } from "lucide-react"
 
 import { NavMain } from "@/components/dashboard/nav-main"
