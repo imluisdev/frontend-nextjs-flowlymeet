@@ -1,5 +1,5 @@
-import { PeerConnectionConfig, SignalData, SignalPayload } from "../types/webrtc.types";
-
+import { PeerConnectionConfig, SignalData } from "../types/webrtc.types";
+import { Socket } from "socket.io-client";
 export const initializePeerConnection = (config: PeerConnectionConfig) => {
   const { userId, type, stream, socket, roomId, onTrack } = config;
   const peer = new RTCPeerConnection({
@@ -34,7 +34,7 @@ export const initializePeerConnection = (config: PeerConnectionConfig) => {
 export const handleSignal = async (
   peer: RTCPeerConnection,
   signal: SignalData,
-  socket: any,
+  socket: Socket,
   roomId: string,
   to: string,
   type: 'video' | 'screen' | 'audio'

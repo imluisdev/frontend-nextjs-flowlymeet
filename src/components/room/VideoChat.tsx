@@ -194,7 +194,7 @@ export default function VideoChat({
     return () => {
       newSocket.close();
     };
-  }, [serverUrl, roomId]);
+  }, [serverUrl, roomId, socket]);
 
   // Setup WebRTC peer connection
   const setupPeerConnection = () => {

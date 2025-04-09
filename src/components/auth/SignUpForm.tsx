@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import Image from "next/image";
 
 export function SignUpForm() {
     const [email, setEmail] = useState('');
@@ -131,9 +132,11 @@ export function SignUpForm() {
             </div>
           </form>
           <div className="relative hidden bg-muted md:block">
-            <img
+            <Image  
               src="https://cdn.sanity.io/images/t64y86n0/production/d47fc36ca05580f9998c039ac6ed7e1aeacb8d3b-1018x1080.png"
               alt="Image"
+              width={100}
+              height={100}
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
             />
           </div>

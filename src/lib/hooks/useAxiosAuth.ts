@@ -2,15 +2,15 @@
 
 import { useEffect } from "react";
 import { axiosAuth } from "../axios";
-import { getSupabaseFrontendClient } from "../supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
 const useAxiosAuth = () => {
-    const supabase = getSupabaseFrontendClient();
+    const supabase = createClient();
 
     useEffect(() => {
         const requestIntercept = axiosAuth.interceptors.request.use(async (config) => {
-            const { data: session} = await supabase.auth.getSession();
-            let accessToken = session?.session?.access_token;
+            const { data } = await supabase.auth.getSession()
+            const accessToken = data.session?.access_token;
             
             if (!config.headers['Authorization']) {
                 config.headers['Authorization'] = `bearer ${accessToken}`
@@ -22,7 +22,7 @@ const useAxiosAuth = () => {
         return () => {
             axiosAuth.interceptors.request.eject(requestIntercept);
         }
-    }, [])
+    }, [supabase.auth])
 
     return axiosAuth;
 }

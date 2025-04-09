@@ -1,5 +1,5 @@
 import { Participant } from './room.types';
-
+import { Socket } from 'socket.io-client';
 export interface Message {
   text: string;
   timestamp: string;
@@ -7,7 +7,7 @@ export interface Message {
 }
 
 export interface RoomState {
-  socket: any;
+  socket: Socket;
   localStream: MediaStream | null;
   screenStream: MediaStream | null;
   peers: Record<string, RTCPeerConnection>;
@@ -18,7 +18,7 @@ export interface RoomState {
 export interface MediaToggleOptions {
   type: 'video' | 'audio';
   stream: MediaStream;
-  socket: any;
+  socket: Socket;
   roomId: string;
 }
 
@@ -26,7 +26,7 @@ export interface PeerConnectionConfig {
   userId: string;
   type: 'video' | 'screen' | 'audio';
   stream: MediaStream | null;
-  socket: any;
+  socket: Socket;
   roomId: string;
   onTrack?: (stream: MediaStream) => void;
 }

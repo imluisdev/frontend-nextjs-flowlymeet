@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import io, { Socket } from 'socket.io-client';
 import { BACKEND_URL } from '@/lib/constants/constants';
 import { Participant } from '@/lib/types/room.types';
-import { Message, RoomState } from '@/lib/types/webrtc.types';
+import { Message } from '@/lib/types/webrtc.types';
 import { initializePeerConnection, handleSignal, toggleMediaTrack, stopMediaStream } from '@/lib/utils/webrtc';
 import { setupSocketEvents, emitJoinRoom, emitLeaveRoom, emitMediaStateChange, emitScreenShareStart, emitScreenShareStop, emitMessage } from '@/lib/utils/socket';
 
@@ -102,6 +102,32 @@ export const useRoom = (roomId: string) => {
       }
     };
   }, [roomId]);
+
+  useEffect(() => {
+    const currentPeers = peers.current;
+    return () => {
+      Object.values(currentPeers).forEach(peer => {
+        peer.close();
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    if (localStream && socket) {
+      participants.forEach(participant => {
+        if (!peers.current[participant.id]) {
+          const peer = initializePeerConnection({
+            userId: participant.id,
+            type: 'video',
+            stream: localStream,
+            socket,
+            roomId
+          });
+          peers.current[participant.id] = peer;
+        }
+      });
+    }
+  }, [localStream, screenStream, socket, roomId, participants]);
 
   const toggleMedia = (type: 'video' | 'audio') => {
     if (localStream && socket) {
