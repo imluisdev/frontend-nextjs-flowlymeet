@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight } from "lucide-react"
-
+import Link from "next/link"
 export default function CallToAction() {
     return (
         <section className="py-20">
@@ -13,10 +13,12 @@ export default function CallToAction() {
                 <p className="text-xl text-muted-foreground mb-8">
                   Únete a FlowlyMeet hoy y descubre una nueva forma de gestionar tus reuniones
                 </p>
-                <Button size="lg" className="bg-[#7886C7] hover:bg-[#7886C7]/90">
-                  Comenzar Gratis
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <Link href="/auth/signup">
+                  <Button size="lg" className="bg-[#7886C7] hover:bg-[#7886C7]/90">
+                    Comenzar Gratis
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

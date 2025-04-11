@@ -20,7 +20,7 @@ const NavbarDesktop = () => {
               </Link>
               <Link href="/create">
                 <Button variant="link" className="font-bold text-[#7886C7]">
-                  Try FlowlyMeet
+                  Probar FlowlyMeet
                 </Button>
               </Link>
               <Link href="/auth/signup">
