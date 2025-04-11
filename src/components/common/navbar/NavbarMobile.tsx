@@ -7,7 +7,7 @@ const NavbarMobile = () => {
     return (
       <nav className="text-[#7886C7] p-4">
         <div className="flex justify-between items-center">
-            <Image src={logoUrl} alt="Logo" className="h-14" width={100} height={100} />
+            <Image src={logoUrl} alt="Logo" className="h-14" width={60} height={100} />
             <button className="text-2xl">☰</button>
         </div>
       </nav>
