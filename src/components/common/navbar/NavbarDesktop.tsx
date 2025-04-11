@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
+
 const NavbarDesktop = () => {
 
     const logoUrl = "https://cdn.sanity.io/images/t64y86n0/production/d47fc36ca05580f9998c039ac6ed7e1aeacb8d3b-1018x1080.png";

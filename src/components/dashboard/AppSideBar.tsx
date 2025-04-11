@@ -30,12 +30,12 @@ const data = {
   navMain: [
     {
       title: "Tus Salas",
-      url: "#",
+      url: "/rooms",
       icon: LayoutDashboardIcon,
     },
     {
       title: "Historial de salas",
-      url: "#",
+      url: "/history",
       icon: HistoryIcon,
     }
   ],

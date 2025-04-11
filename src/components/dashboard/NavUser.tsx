@@ -45,7 +45,6 @@ export function NavUser() {
   useEffect(() => {
     const getUser = async () => {
       const { data } = await supabase.auth.getSession()
-      console.log(data)
       if (data.session?.user) {
         setUser({
           name: data.session.user.user_metadata?.name || data.session.user.email?.split('@')[0] || 'User',
