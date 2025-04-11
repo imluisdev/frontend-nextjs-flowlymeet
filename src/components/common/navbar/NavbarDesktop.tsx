@@ -17,7 +17,7 @@ const NavbarDesktop = () => {
                   Acerca de
                 </Button>
               </Link>
-              <Link href="/room/create">
+              <Link href="/create">
                 <Button variant="link" className="font-bold text-[#7886C7]">
                   Try FlowlyMeet
                 </Button>

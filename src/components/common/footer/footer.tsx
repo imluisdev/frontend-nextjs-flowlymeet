@@ -47,11 +47,6 @@ export function Footer() {
                   Sobre Nosotros
                 </Link>
               </li>
-              <li>
-                <Link href="/features" className="text-sm text-muted-foreground hover:text-[#7886C7] transition-colors">
-                  Características
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -80,7 +75,7 @@ export function Footer() {
                 andreereyes0@gmail.com
               </li>
               <li className="text-sm text-muted-foreground">
-                México
+                luisarmandogod2001@gmail.com
               </li>
             </ul>
           </div>

@@ -137,8 +137,8 @@ export function LoginForm() {
               width={100}
               height={100}
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-              unoptimized={true} // Ensure this prop is set correctly
-              priority={true} // Ensure this prop is set correctly for loading performance
+              unoptimized={true}
+              priority={true}
             />
           </div>
         </CardContent>

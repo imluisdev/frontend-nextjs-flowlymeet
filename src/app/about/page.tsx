@@ -6,7 +6,7 @@ const teamMembers = [
     name: "Axel Andree Pérez Reyes",
     role: "Software Engineer",
     description: "Full Stack Developer",
-    imageSrc: "/images/axel.png",
+    imageSrc: "/images/axel.jpeg",
     socialLinks: {
       github: "https://github.com/BlackIcee1234",
       linkedin: "https://www.linkedin.com/in/axel-andree/",
